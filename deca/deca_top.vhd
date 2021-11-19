@@ -12,11 +12,11 @@ entity deca_top is
 	port
 	(
 		ADC_CLK_10		: IN STD_LOGIC;
-		MAX10_CLK1_50		: IN STD_LOGIC;
-		MAX10_CLK2_50		: IN STD_LOGIC;
-		KEY			: IN STD_LOGIC_VECTOR(1 DOWNTO 0);
-		LED			: OUT STD_LOGIC_VECTOR(3 DOWNTO 0) := "1111";
-               -- SDRAM
+		MAX10_CLK1_50	: IN STD_LOGIC;
+		MAX10_CLK2_50	: IN STD_LOGIC;
+		KEY				: IN STD_LOGIC_VECTOR(1 DOWNTO 0);
+		LED				: OUT STD_LOGIC_VECTOR(3 DOWNTO 0) := "1111";
+        -- SDRAM
 		DRAM_CLK		: OUT STD_LOGIC;
 		DRAM_CKE		: OUT STD_LOGIC;
 		DRAM_ADDR		: OUT STD_LOGIC_VECTOR(12 DOWNTO 0);
@@ -28,7 +28,7 @@ entity deca_top is
 		DRAM_WE_N		: OUT STD_LOGIC;
 		DRAM_CAS_N		: OUT STD_LOGIC;
 		DRAM_RAS_N		: OUT STD_LOGIC;
-               -- VGA
+        -- VGA
 		VGA_HS			: OUT STD_LOGIC;
 		VGA_VS			: OUT STD_LOGIC;
 		VGA_R			: OUT STD_LOGIC_VECTOR(3 DOWNTO 0);
@@ -48,7 +48,7 @@ entity deca_top is
 		-- JOYSTICK
 		JOY1_B2_P9		: IN    STD_LOGIC;
 		JOY1_B1_P6		: IN    STD_LOGIC;
-		JOY1_UP		: IN    STD_LOGIC;
+		JOY1_UP			: IN    STD_LOGIC;
 		JOY1_DOWN		: IN    STD_LOGIC;
 		JOY1_LEFT		: IN    STD_LOGIC;
 		JOY1_RIGHT		: IN    STD_LOGIC;
@@ -61,7 +61,7 @@ entity deca_top is
 		SD_SEL               	: OUT   STD_LOGIC := '0';   
 		SD_CMD_DIR           	: OUT   STD_LOGIC := '1';  
 		SD_D0_DIR            	: OUT   STD_LOGIC := '0';  
-		SD_D123_DIR            : OUT   STD_LOGIC;
+		SD_D123_DIR             : OUT   STD_LOGIC;
 		-- HDMI-TX  DECA 
 		HDMI_I2C_SCL  		: INOUT STD_LOGIC; 		          		
 		HDMI_I2C_SDA  		: INOUT STD_LOGIC; 		          		
@@ -74,19 +74,19 @@ entity deca_top is
 		HDMI_TX_DE    		: OUT   STD_LOGIC;		          		 
 		HDMI_TX_HS    		: OUT	STD_LOGIC;	          		
 		HDMI_TX_INT   		: IN    STD_LOGIC;		          		
-		HDMI_TX_VS    		: OUT   STD_LOGIC;         
-               -- AUDIO CODEC  DECA 
-		AUDIO_GPIO_MFP5  	: INOUT STD_LOGIC;
-		AUDIO_MISO_MFP4  	: IN    STD_LOGIC;
-		AUDIO_RESET_n    	: INOUT STD_LOGIC;
-		AUDIO_SCLK_MFP3  	: OUT   STD_LOGIC;
-		AUDIO_SCL_SS_n   	: OUT   STD_LOGIC;
-		AUDIO_SDA_MOSI   	: INOUT STD_LOGIC;
-		AUDIO_SPI_SELECT 	: OUT   STD_LOGIC;
-		I2S_MCK 		: OUT   STD_LOGIC;
-		I2S_SCK 		: OUT   STD_LOGIC;
-		I2S_LR  		: OUT   STD_LOGIC;
-		I2S_D   		: OUT   STD_LOGIC		
+		HDMI_TX_VS    		: OUT   STD_LOGIC        
+        -- -- AUDIO CODEC  DECA 
+		-- AUDIO_GPIO_MFP5  	: INOUT STD_LOGIC;
+		-- AUDIO_MISO_MFP4  	: IN    STD_LOGIC;
+		-- AUDIO_RESET_n    	: INOUT STD_LOGIC;
+		-- AUDIO_SCLK_MFP3  	: OUT   STD_LOGIC;
+		-- AUDIO_SCL_SS_n   	: OUT   STD_LOGIC;
+		-- AUDIO_SDA_MOSI   	: INOUT STD_LOGIC;
+		-- AUDIO_SPI_SELECT 	: OUT   STD_LOGIC;
+		-- I2S_MCK 		: OUT   STD_LOGIC;
+		-- I2S_SCK 		: OUT   STD_LOGIC;
+		-- I2S_LR  		: OUT   STD_LOGIC;
+		-- I2S_D   		: OUT   STD_LOGIC		
 	);
 END entity;
 
@@ -141,49 +141,42 @@ architecture RTL of deca_top is
 	signal joyd : std_logic_vector(7 downto 0);
 
 
-component AUDIO_SPI_CTL_RD
-    port (
-    iRESET_n : in std_logic;
-    iCLK_50 : in std_logic;
-    oCS_n : out std_logic;
-    oSCLK : out std_logic;
-    oDIN : out std_logic;
-    iDOUT : in std_logic
-  );
-end component;
+-- component AUDIO_SPI_CTL_RD
+--     port (
+--     iRESET_n : in std_logic;
+--     iCLK_50 : in std_logic;
+--     oCS_n : out std_logic;
+--     oSCLK : out std_logic;
+--     oDIN : out std_logic;
+--     iDOUT : in std_logic
+--   );
+-- end component;
 
-signal RESET_DELAY_n     : std_logic;   
+-- signal RESET_DELAY_n     : std_logic;   
 
-component audio_top is
-Port ( 	
-		clk_50MHz : in STD_LOGIC; -- system clock (50 MHz)
-		dac_MCLK : out STD_LOGIC; -- outputs to PMODI2L DAC
-		dac_LRCK : out STD_LOGIC;
-		dac_SCLK : out STD_LOGIC;
-		dac_SDIN : out STD_LOGIC;
-		L_data : 	in std_logic_vector(15 downto 0);  	-- LEFT data (16-bit signed)
-		R_data : 	in std_logic_vector(15 downto 0)  	-- RIGHT data (16-bit signed) 
-);
-end component;	
+-- component audio_top is
+-- Port ( 	
+-- 		clk_50MHz : in STD_LOGIC; -- system clock (50 MHz)
+-- 		dac_MCLK : out STD_LOGIC; -- outputs to PMODI2L DAC
+-- 		dac_LRCK : out STD_LOGIC;
+-- 		dac_SCLK : out STD_LOGIC;
+-- 		dac_SDIN : out STD_LOGIC;
+-- 		L_data : 	in std_logic_vector(15 downto 0);  	-- LEFT data (16-bit signed)
+-- 		R_data : 	in std_logic_vector(15 downto 0)  	-- RIGHT data (16-bit signed) 
+-- );
+-- end component;	
 
 
--- DAC AUDIO     
-signal dac_l: signed(15 downto 0);
-signal dac_r: signed(15 downto 0);
---signal dac_l: std_logic_vector(15 downto 0);
---signal dac_r: std_logic_vector(15 downto 0);
-
---signal dac_l: signed(9 downto 0);
---signal dac_r: signed(9 downto 0);
---signal dac_l_s: signed(15 downto 0);
---signal dac_r_s: signed(15 downto 0);
+-- -- DAC AUDIO     
+-- signal dac_l: signed(15 downto 0);
+-- signal dac_r: signed(15 downto 0);
 
 
 -- HDMI
-signal i2s_Mck_o : std_logic;
-signal i2s_Sck_o : std_logic;
-signal i2s_Lr_o : std_logic;
-signal i2s_D_o : std_logic;
+-- signal i2s_Mck_o : std_logic;
+-- signal i2s_Sck_o : std_logic;
+-- signal i2s_Lr_o : std_logic;
+-- signal i2s_D_o : std_logic;
 
 component I2C_HDMI_Config
     port (
@@ -197,6 +190,11 @@ end component;
 
 signal hdmi_clk :  std_logic;
 signal hdmi_blank  :  std_logic;
+signal vga_x_r :  STD_LOGIC_VECTOR(5 DOWNTO 0); 
+signal vga_x_g :  STD_LOGIC_VECTOR(5 DOWNTO 0); 
+signal vga_x_b :  STD_LOGIC_VECTOR(5 DOWNTO 0); 
+signal vga_x_hs :  std_logic; 
+signal vga_x_vs :  std_logic; 
 
 begin
 
@@ -235,52 +233,49 @@ SD_D0_DIR                       <= '0';  -- MISO FPGA input
 SD_D123_DIR                     <= '1';  -- CS FPGA output  
 
 
-VGA_R<=vga_red(7 downto 4);
-VGA_G<=vga_green(7 downto 4);
-VGA_B<=vga_blue(7 downto 4);
+VGA_R <=vga_red(7 downto 4);
+VGA_G <=vga_green(7 downto 4);
+VGA_B <=vga_blue(7 downto 4);
 VGA_HS<=vga_hsync;
 VGA_VS<=vga_vsync;
 
 
--- DECA AUDIO CODEC
-RESET_DELAY_n <= reset_n;
--- Audio DAC DECA Output assignments
-AUDIO_GPIO_MFP5  <= '1';  -- GPIO
-AUDIO_SPI_SELECT <= '1';  -- SPI mode
-AUDIO_RESET_n    <= RESET_DELAY_n;    
+-- -- DECA AUDIO CODEC
+-- RESET_DELAY_n <= reset_n;
+-- -- Audio DAC DECA Output assignments
+-- AUDIO_GPIO_MFP5  <= '1';  -- GPIO
+-- AUDIO_SPI_SELECT <= '1';  -- SPI mode
+-- AUDIO_RESET_n    <= RESET_DELAY_n;    
 
--- DECA AUDIO CODEC SPI CONFIG
-AUDIO_SPI_CTL_RD_inst : AUDIO_SPI_CTL_RD
-port map (
-	iRESET_n => RESET_DELAY_n,
-	iCLK_50 => MAX10_CLK1_50,
-	oCS_n => AUDIO_SCL_SS_n,
-	oSCLK => AUDIO_SCLK_MFP3,
-	oDIN => AUDIO_SDA_MOSI,
-	iDOUT => AUDIO_MISO_MFP4
-);
+-- -- DECA AUDIO CODEC SPI CONFIG
+-- AUDIO_SPI_CTL_RD_inst : AUDIO_SPI_CTL_RD
+-- port map (
+-- 	iRESET_n => RESET_DELAY_n,
+-- 	iCLK_50 => MAX10_CLK1_50,
+-- 	oCS_n => AUDIO_SCL_SS_n,
+-- 	oSCLK => AUDIO_SCLK_MFP3,
+-- 	oDIN => AUDIO_SDA_MOSI,
+-- 	iDOUT => AUDIO_MISO_MFP4
+-- );
 
--- AUDIO CODEC
-audio_i2s: entity work.audio_top
-port map(
-	clk_50MHz => MAX10_CLK1_50,
-	dac_MCLK  => i2s_Mck_o,
-	dac_LRCK  => i2s_Lr_o,
-	dac_SCLK  => i2s_Sck_o,
-	dac_SDIN  => i2s_D_o,
-	L_data    => std_logic_vector(dac_l),
-	R_data    => std_logic_vector(dac_r)
---	L_data    => std_logic_vector(dac_l_s),
---	R_data    => std_logic_vector(dac_r_s)
-);		
+-- -- AUDIO CODEC
+-- audio_i2s: entity work.audio_top
+-- port map(
+-- 	clk_50MHz => MAX10_CLK1_50,
+-- 	dac_MCLK  => i2s_Mck_o,
+-- 	dac_LRCK  => i2s_Lr_o,
+-- 	dac_SCLK  => i2s_Sck_o,
+-- 	dac_SDIN  => i2s_D_o,
+-- 	L_data    => std_logic_vector(dac_l),
+-- 	R_data    => std_logic_vector(dac_r)
+-- --	L_data    => std_logic_vector(dac_l_s),
+-- --	R_data    => std_logic_vector(dac_r_s)
+-- );		
 
---dac_l_s <= ('0' & dac_l & "00000");
---dac_r_s <= ('0' & dac_r & "00000");
-
-I2S_MCK <= i2s_Mck_o;
-I2S_SCK <= i2s_Sck_o;
-I2S_LR <= i2s_Lr_o;
-I2S_D <= i2s_D_o;
+-- I2S_MCK <= i2s_Mck_o;
+-- I2S_SCK <= i2s_Sck_o;
+-- I2S_LR <= i2s_Lr_o;
+-- I2S_D <= i2s_D_o;
 
 
 -- HDMI CONFIG    
@@ -296,15 +291,16 @@ port map (
 --  HDMI VIDEO   
 HDMI_TX_CLK <= hdmi_clk;	
 HDMI_TX_DE <= not hdmi_blank;
-HDMI_TX_HS <= vga_hsync;
-HDMI_TX_VS <= vga_vsync;
-HDMI_TX_D <= vga_red(7 downto 2)&vga_red(7 downto 6)&vga_green(7 downto 2)&vga_green(7 downto 6)&vga_blue(7 downto 2)&vga_blue(7 downto 6);
+HDMI_TX_HS <= vga_x_hs;
+HDMI_TX_VS <= vga_x_vs;
+HDMI_TX_D <= vga_x_r&vga_x_r(5 downto 4)&vga_x_g&vga_x_g(5 downto 4)&vga_x_b&vga_x_b(5 downto 4);
 
---  HDMI AUDIO   
-HDMI_MCLK <= i2s_Mck_o;
-HDMI_SCLK <= i2s_Sck_o;    -- lr*2*16
-HDMI_LRCLK <= i2s_Lr_o;   
-HDMI_I2S(0) <= i2s_D_o;
+
+-- --  HDMI AUDIO   
+-- HDMI_MCLK <= i2s_Mck_o;
+-- HDMI_SCLK <= i2s_Sck_o;    -- lr*2*16
+-- HDMI_LRCLK <= i2s_Lr_o;   
+-- HDMI_I2S(0) <= i2s_D_o;
 
 
 
@@ -314,8 +310,8 @@ guest: COMPONENT sdramtest_top
 		CLOCK_27 => MAX10_CLK1_50,
 --         	CLOCK_27 => MAX10_CLK2_50&MAX10_CLK1_50,
 --	        RESET_N => reset_n,
---                LED => LED(0),		 
-               --SDRAM
+--          LED => LED(0),		 
+        --SDRAM
 		SDRAM_DQ => DRAM_DQ,
 		SDRAM_A => DRAM_ADDR,
 		SDRAM_DQML => DRAM_LDQM,
@@ -339,19 +335,25 @@ guest: COMPONENT sdramtest_top
 		SPI_SS3 => spi_ss3,
 		SPI_SS4	=> spi_ss4,
 		CONF_DATA0 => conf_data0,
-               --VGA
+        --VGA
 		VGA_HS => vga_hsync,
 		VGA_VS => vga_vsync,
 		VGA_R => vga_red(7 downto 2),
 		VGA_G => vga_green(7 downto 2),
 		VGA_B => vga_blue(7 downto 2),
---	             VGA_BLANK => hdmi_blank,
---	             VGA_CLK => hdmi_clk,
-                --AUDIO
+	            VGA_BLANK => hdmi_blank,
+	            VGA_CLK => hdmi_clk,
+				vga_x_r  => vga_x_r,
+				vga_x_g  => vga_x_g,
+				vga_x_b  => vga_x_b,
+				vga_x_hs  => vga_x_hs,
+				vga_x_vs  => vga_x_vs,
+
+        --AUDIO
 		AUDIO_L => sigma_l,
 		AUDIO_R => sigma_r
 --		DAC_L   => dac_l,
---                DAC_R   => dac_r
+--      DAC_R   => dac_r
 
 );
 

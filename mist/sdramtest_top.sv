@@ -52,6 +52,15 @@ module sdramtest_top (
    output [5:0]  VGA_G,
    output [5:0]  VGA_B,
 
+   //added for HDMI DAC (deca)
+   output 		 VGA_BLANK,	
+   output		 VGA_CLK,	
+   output  [5:0] vga_x_r,
+   output  [5:0] vga_x_g,
+   output  [5:0] vga_x_b,
+   output 		 vga_x_hs,
+   output 		 vga_x_vs,
+
    input     UART_RX,
    output    UART_TX
 );
@@ -158,8 +167,20 @@ sdramtest #(.sysclk_frequency(1000)) test (
 	.vs(vs),
 	.r(r),
 	.g(g),
-	.b(b)
+	.b(b),
+	.vena(vena),
+	.pixel(pixel)			 
 );
+
+wire vena;
+wire pixel;
+assign VGA_BLANK = ~vena;
+assign VGA_CLK = pixel;
+assign vga_x_r  = r[7:2];
+assign vga_x_g  = g[7:2];
+assign vga_x_b  = b[7:2];
+assign vga_x_hs = hs;
+assign vga_x_vs = vs;
 
 endmodule
 

@@ -42,6 +42,13 @@ constant demistify_romsize2 : integer := 12; -- 4k for the second chunk, mirrore
 			VGA_R		:	 OUT STD_LOGIC_VECTOR(5 DOWNTO 0);
 			VGA_G		:	 OUT STD_LOGIC_VECTOR(5 DOWNTO 0);
 			VGA_B		:	 OUT STD_LOGIC_VECTOR(5 DOWNTO 0);
+				VGA_BLANK : out std_logic; 
+				VGA_CLK : out std_logic;
+				vga_x_r : out STD_LOGIC_VECTOR(5 DOWNTO 0); 
+				vga_x_g : out STD_LOGIC_VECTOR(5 DOWNTO 0); 
+				vga_x_b : out STD_LOGIC_VECTOR(5 DOWNTO 0); 
+				vga_x_hs : out std_logic; 
+				vga_x_vs : out std_logic; 
 			AUDIO_L  : out std_logic;
 			AUDIO_R  : out std_logic
 		);

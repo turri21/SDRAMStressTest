@@ -40,7 +40,7 @@ make BOARD=deca
 After that you can:
 
 * Flash bitstream directly from [command line](https://github.com/DECAfpga/DECA_binaries#flash-bitstream-to-fgpa-with-quartus)
-* Load project in Quartus from /deca/nes_deca.qpf
+* Load project in Quartus from /deca/SDRAMStressTest_deca.qpf
 
 ## Pinout connections
 
