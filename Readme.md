@@ -25,3 +25,18 @@ The MiSTer memory modules in common use share the DQM pins with the upper two ad
 On boards which don't have this limitation, the tester can run in CL3 mode, as fast as the chips will allow.
 In order to have some compatibility with both types of memory, this tester doesn't make use of burst mode.
 
+## Test results
+
+Video output will result in a green screen if no errors are detected. Each error will show a red strip in the screen.
+
+To show numeric results you should execute this script meanwhile the core is running:
+
+```sh
+#git clone https://github.com/DECAfpga/SDRAMStressTest
+#cd SDRAMStressTest
+git  submodule update --init --recursive 
+/path/a/quartus/bin/quartus_stp -t jtagbridge.tcl
+```
+
+NOTE: Between different tests it is better to power cycle the board.
+

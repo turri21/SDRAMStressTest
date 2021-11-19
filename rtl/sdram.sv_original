@@ -43,9 +43,9 @@
 // If the core has a variable clock, specify the fastest rate.
 
 // SDRAM_RISKCONTENTION <set to 1 to leave less space between reads and subsequent writes in CL3 mode.>
-//`define SDRAM_RISKCONTENTION 0
+`define SDRAM_RISKCONTENTION 0
 
-//`define SDRAM_CL 2
+`define SDRAM_CL 2
 
 module sdram #(parameter SDRAM_tCK=7800 )
 (
