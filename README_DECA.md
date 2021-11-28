@@ -18,23 +18,24 @@
 ```sh
 git clone https://github.com/DECAfpga/SDRAMStressTest
 cd SDRAMStressTest
-git submodule update --init --recursive
 #Do a first make (will finish in error). It will download missing submodules 
 make
-#when asked just accept default settings with Enter key
+#In case does submodules are not downloaded
+git submodule update --init --recursive  
+#[Recommended step only needed if main branch is outdated]
+git checkout somhic
 #Create file site.mk in DeMiSTify folder 
 cd DeMiSTify
 cp site.template site.mk
 #Edit site.mk and add your own PATHs to Quartus (Q19)
 gedit site.mk
-#[Recommended step only needed if main branch is outdated]
-git checkout somhic
 #[DECA ONLY]Copy mofified deca_pins.tcl file to Demistify folder (MODIFICATION FOR 3 PINS SDRAM. THIS IS A TEMPORARY FIX)
 cd ../deca
 cp deca_pins.tcl_copy_to_demistify_board_deca ../DeMiSTify/Board/deca/deca_pins.tcl 
 #Go back to root folder and do a make with board target (deca, neptuno, ...). If not specified it will compile for all targets.
 cd ..
 make BOARD=deca
+#when asked just accept default settings with Enter key
 ```
 
 After that you can:
