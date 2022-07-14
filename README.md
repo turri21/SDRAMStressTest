@@ -44,5 +44,5 @@ NOTE: Between different tests it is better to power cycle the board.
 
 Follows specific details for each board:
 
-* [DECA board README](README_DECA.md)
+* [DECA board README](deca/README.md)
 

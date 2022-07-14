@@ -3,4 +3,4 @@
 	url = https://github.com/mist-devel/mist-modules.git
 [submodule "DeMiSTify"]
 	path = DeMiSTify
-	url = https://github.com/DECAfpga/DeMiSTify.git
+	url = https://github.com/robinsonb5/DeMiSTify.git
