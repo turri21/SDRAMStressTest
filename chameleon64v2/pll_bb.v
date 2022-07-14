@@ -1,4 +1,4 @@
-// megafunction wizard: %ALTPLL%
+// megafunction wizard: %ALTPLL%VBB%
 // GENERATION: STANDARD
 // VERSION: WM1.0
 // MODULE: altpll 
@@ -17,7 +17,6 @@
 // 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 // ************************************************************
 
-
 //Copyright (C) 2018  Intel Corporation. All rights reserved.
 //Your use of Intel Corporation's design tools, logic functions 
 //and other software and tools, and its AMPP partner logic 
@@ -32,10 +31,6 @@
 //Intel and sold by Intel or its authorized distributors.  Please
 //refer to the applicable agreement for further details.
 
-
-// synopsys translate_off
-`timescale 1 ps / 1 ps
-// synopsys translate_on
 module pll (
 	areset,
 	inclk0,
@@ -58,122 +53,6 @@ module pll (
 // synopsys translate_on
 `endif
 
-	wire [4:0] sub_wire0;
-	wire  sub_wire4;
-	wire [0:0] sub_wire7 = 1'h0;
-	wire [2:2] sub_wire3 = sub_wire0[2:2];
-	wire [1:1] sub_wire2 = sub_wire0[1:1];
-	wire [0:0] sub_wire1 = sub_wire0[0:0];
-	wire  c0 = sub_wire1;
-	wire  c1 = sub_wire2;
-	wire  c2 = sub_wire3;
-	wire  locked = sub_wire4;
-	wire  sub_wire5 = inclk0;
-	wire [1:0] sub_wire6 = {sub_wire7, sub_wire5};
-
-	altpll	altpll_component (
-				.areset (areset),
-				.inclk (sub_wire6),
-				.clk (sub_wire0),
-				.locked (sub_wire4),
-				.activeclock (),
-				.clkbad (),
-				.clkena ({6{1'b1}}),
-				.clkloss (),
-				.clkswitch (1'b0),
-				.configupdate (1'b0),
-				.enable0 (),
-				.enable1 (),
-				.extclk (),
-				.extclkena ({4{1'b1}}),
-				.fbin (1'b1),
-				.fbmimicbidir (),
-				.fbout (),
-				.fref (),
-				.icdrclk (),
-				.pfdena (1'b1),
-				.phasecounterselect ({4{1'b1}}),
-				.phasedone (),
-				.phasestep (1'b1),
-				.phaseupdown (1'b1),
-				.pllena (1'b1),
-				.scanaclr (1'b0),
-				.scanclk (1'b0),
-				.scanclkena (1'b1),
-				.scandata (1'b0),
-				.scandataout (),
-				.scandone (),
-				.scanread (1'b0),
-				.scanwrite (1'b0),
-				.sclkout0 (),
-				.sclkout1 (),
-				.vcooverrange (),
-				.vcounderrange ());
-	defparam
-		altpll_component.bandwidth_type = "AUTO",
-		altpll_component.clk0_divide_by = 1,
-		altpll_component.clk0_duty_cycle = 50,
-		altpll_component.clk0_multiply_by = 2,
-		altpll_component.clk0_phase_shift = "-1500",
-		altpll_component.clk1_divide_by = 1,
-		altpll_component.clk1_duty_cycle = 50,
-		altpll_component.clk1_multiply_by = 2,
-		altpll_component.clk1_phase_shift = "0",
-		altpll_component.clk2_divide_by = 1,
-		altpll_component.clk2_duty_cycle = 50,
-		altpll_component.clk2_multiply_by = 1,
-		altpll_component.clk2_phase_shift = "0",
-		altpll_component.inclk0_input_frequency = 20000,
-		altpll_component.intended_device_family = "MAX 10",
-		altpll_component.lpm_hint = "CBX_MODULE_PREFIX=pll",
-		altpll_component.lpm_type = "altpll",
-		altpll_component.operation_mode = "NO_COMPENSATION",
-		altpll_component.pll_type = "AUTO",
-		altpll_component.port_activeclock = "PORT_UNUSED",
-		altpll_component.port_areset = "PORT_USED",
-		altpll_component.port_clkbad0 = "PORT_UNUSED",
-		altpll_component.port_clkbad1 = "PORT_UNUSED",
-		altpll_component.port_clkloss = "PORT_UNUSED",
-		altpll_component.port_clkswitch = "PORT_UNUSED",
-		altpll_component.port_configupdate = "PORT_UNUSED",
-		altpll_component.port_fbin = "PORT_UNUSED",
-		altpll_component.port_inclk0 = "PORT_USED",
-		altpll_component.port_inclk1 = "PORT_UNUSED",
-		altpll_component.port_locked = "PORT_USED",
-		altpll_component.port_pfdena = "PORT_UNUSED",
-		altpll_component.port_phasecounterselect = "PORT_UNUSED",
-		altpll_component.port_phasedone = "PORT_UNUSED",
-		altpll_component.port_phasestep = "PORT_UNUSED",
-		altpll_component.port_phaseupdown = "PORT_UNUSED",
-		altpll_component.port_pllena = "PORT_UNUSED",
-		altpll_component.port_scanaclr = "PORT_UNUSED",
-		altpll_component.port_scanclk = "PORT_UNUSED",
-		altpll_component.port_scanclkena = "PORT_UNUSED",
-		altpll_component.port_scandata = "PORT_UNUSED",
-		altpll_component.port_scandataout = "PORT_UNUSED",
-		altpll_component.port_scandone = "PORT_UNUSED",
-		altpll_component.port_scanread = "PORT_UNUSED",
-		altpll_component.port_scanwrite = "PORT_UNUSED",
-		altpll_component.port_clk0 = "PORT_USED",
-		altpll_component.port_clk1 = "PORT_USED",
-		altpll_component.port_clk2 = "PORT_USED",
-		altpll_component.port_clk3 = "PORT_UNUSED",
-		altpll_component.port_clk4 = "PORT_UNUSED",
-		altpll_component.port_clk5 = "PORT_UNUSED",
-		altpll_component.port_clkena0 = "PORT_UNUSED",
-		altpll_component.port_clkena1 = "PORT_UNUSED",
-		altpll_component.port_clkena2 = "PORT_UNUSED",
-		altpll_component.port_clkena3 = "PORT_UNUSED",
-		altpll_component.port_clkena4 = "PORT_UNUSED",
-		altpll_component.port_clkena5 = "PORT_UNUSED",
-		altpll_component.port_extclk0 = "PORT_UNUSED",
-		altpll_component.port_extclk1 = "PORT_UNUSED",
-		altpll_component.port_extclk2 = "PORT_UNUSED",
-		altpll_component.port_extclk3 = "PORT_UNUSED",
-		altpll_component.self_reset_on_loss_lock = "OFF",
-		altpll_component.width_clock = 5;
-
-
 endmodule
 
 // ============================================================
@@ -189,7 +68,7 @@ endmodule
 // Retrieval info: PRIVATE: CLKBAD_SWITCHOVER_CHECK STRING "0"
 // Retrieval info: PRIVATE: CLKLOSS_CHECK STRING "0"
 // Retrieval info: PRIVATE: CLKSWITCH_CHECK STRING "0"
-// Retrieval info: PRIVATE: CNX_NO_COMPENSATE_RADIO STRING "1"
+// Retrieval info: PRIVATE: CNX_NO_COMPENSATE_RADIO STRING "0"
 // Retrieval info: PRIVATE: CREATE_CLKBAD_CHECK STRING "0"
 // Retrieval info: PRIVATE: CREATE_INCLK1_CHECK STRING "0"
 // Retrieval info: PRIVATE: CUR_DEDICATED_CLK STRING "c0"
@@ -201,9 +80,9 @@ endmodule
 // Retrieval info: PRIVATE: DUTY_CYCLE0 STRING "50.00000000"
 // Retrieval info: PRIVATE: DUTY_CYCLE1 STRING "50.00000000"
 // Retrieval info: PRIVATE: DUTY_CYCLE2 STRING "50.00000000"
-// Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE0 STRING "100.000000"
-// Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE1 STRING "100.000000"
-// Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE2 STRING "50.000000"
+// Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE0 STRING "133.330002"
+// Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE1 STRING "133.330002"
+// Retrieval info: PRIVATE: EFF_OUTPUT_FREQ_VALUE2 STRING "66.660004"
 // Retrieval info: PRIVATE: EXPLICIT_SWITCHOVER_COUNTER STRING "0"
 // Retrieval info: PRIVATE: EXT_FEEDBACK_RADIO STRING "0"
 // Retrieval info: PRIVATE: GLOCKED_COUNTER_EDIT_CHANGED STRING "1"
@@ -217,7 +96,7 @@ endmodule
 // Retrieval info: PRIVATE: INCLK1_FREQ_EDIT_CHANGED STRING "1"
 // Retrieval info: PRIVATE: INCLK1_FREQ_UNIT_CHANGED STRING "1"
 // Retrieval info: PRIVATE: INCLK1_FREQ_UNIT_COMBO STRING "MHz"
-// Retrieval info: PRIVATE: INTENDED_DEVICE_FAMILY STRING "MAX 10"
+// Retrieval info: PRIVATE: INTENDED_DEVICE_FAMILY STRING "Cyclone 10 LP"
 // Retrieval info: PRIVATE: INT_FEEDBACK__MODE_RADIO STRING "1"
 // Retrieval info: PRIVATE: LOCKED_OUTPUT_CHECK STRING "1"
 // Retrieval info: PRIVATE: LONG_SCAN_RADIO STRING "1"
@@ -233,10 +112,10 @@ endmodule
 // Retrieval info: PRIVATE: MULT_FACTOR0 NUMERIC "1"
 // Retrieval info: PRIVATE: MULT_FACTOR1 NUMERIC "1"
 // Retrieval info: PRIVATE: MULT_FACTOR2 NUMERIC "1"
-// Retrieval info: PRIVATE: NORMAL_MODE_RADIO STRING "0"
-// Retrieval info: PRIVATE: OUTPUT_FREQ0 STRING "100.00000000"
-// Retrieval info: PRIVATE: OUTPUT_FREQ1 STRING "100.00000000"
-// Retrieval info: PRIVATE: OUTPUT_FREQ2 STRING "50.00000000"
+// Retrieval info: PRIVATE: NORMAL_MODE_RADIO STRING "1"
+// Retrieval info: PRIVATE: OUTPUT_FREQ0 STRING "133.33000000"
+// Retrieval info: PRIVATE: OUTPUT_FREQ1 STRING "133.33000000"
+// Retrieval info: PRIVATE: OUTPUT_FREQ2 STRING "66.66000000"
 // Retrieval info: PRIVATE: OUTPUT_FREQ_MODE0 STRING "1"
 // Retrieval info: PRIVATE: OUTPUT_FREQ_MODE1 STRING "1"
 // Retrieval info: PRIVATE: OUTPUT_FREQ_MODE2 STRING "1"
@@ -276,8 +155,6 @@ endmodule
 // Retrieval info: PRIVATE: STICKY_CLK0 STRING "1"
 // Retrieval info: PRIVATE: STICKY_CLK1 STRING "1"
 // Retrieval info: PRIVATE: STICKY_CLK2 STRING "1"
-// Retrieval info: PRIVATE: STICKY_CLK3 STRING "0"
-// Retrieval info: PRIVATE: STICKY_CLK4 STRING "0"
 // Retrieval info: PRIVATE: SWITCHOVER_COUNT_EDIT NUMERIC "1"
 // Retrieval info: PRIVATE: SWITCHOVER_FEATURE_ENABLED STRING "1"
 // Retrieval info: PRIVATE: SYNTH_WRAPPER_GEN_POSTFIX STRING "0"
@@ -291,22 +168,23 @@ endmodule
 // Retrieval info: PRIVATE: ZERO_DELAY_RADIO STRING "0"
 // Retrieval info: LIBRARY: altera_mf altera_mf.altera_mf_components.all
 // Retrieval info: CONSTANT: BANDWIDTH_TYPE STRING "AUTO"
-// Retrieval info: CONSTANT: CLK0_DIVIDE_BY NUMERIC "1"
+// Retrieval info: CONSTANT: CLK0_DIVIDE_BY NUMERIC "5000"
 // Retrieval info: CONSTANT: CLK0_DUTY_CYCLE NUMERIC "50"
-// Retrieval info: CONSTANT: CLK0_MULTIPLY_BY NUMERIC "2"
+// Retrieval info: CONSTANT: CLK0_MULTIPLY_BY NUMERIC "13333"
 // Retrieval info: CONSTANT: CLK0_PHASE_SHIFT STRING "-1500"
-// Retrieval info: CONSTANT: CLK1_DIVIDE_BY NUMERIC "1"
+// Retrieval info: CONSTANT: CLK1_DIVIDE_BY NUMERIC "5000"
 // Retrieval info: CONSTANT: CLK1_DUTY_CYCLE NUMERIC "50"
-// Retrieval info: CONSTANT: CLK1_MULTIPLY_BY NUMERIC "2"
+// Retrieval info: CONSTANT: CLK1_MULTIPLY_BY NUMERIC "13333"
 // Retrieval info: CONSTANT: CLK1_PHASE_SHIFT STRING "0"
-// Retrieval info: CONSTANT: CLK2_DIVIDE_BY NUMERIC "1"
+// Retrieval info: CONSTANT: CLK2_DIVIDE_BY NUMERIC "2500"
 // Retrieval info: CONSTANT: CLK2_DUTY_CYCLE NUMERIC "50"
-// Retrieval info: CONSTANT: CLK2_MULTIPLY_BY NUMERIC "1"
+// Retrieval info: CONSTANT: CLK2_MULTIPLY_BY NUMERIC "3333"
 // Retrieval info: CONSTANT: CLK2_PHASE_SHIFT STRING "0"
+// Retrieval info: CONSTANT: COMPENSATE_CLOCK STRING "CLK0"
 // Retrieval info: CONSTANT: INCLK0_INPUT_FREQUENCY NUMERIC "20000"
-// Retrieval info: CONSTANT: INTENDED_DEVICE_FAMILY STRING "MAX 10"
+// Retrieval info: CONSTANT: INTENDED_DEVICE_FAMILY STRING "Cyclone 10 LP"
 // Retrieval info: CONSTANT: LPM_TYPE STRING "altpll"
-// Retrieval info: CONSTANT: OPERATION_MODE STRING "NO_COMPENSATION"
+// Retrieval info: CONSTANT: OPERATION_MODE STRING "NORMAL"
 // Retrieval info: CONSTANT: PLL_TYPE STRING "AUTO"
 // Retrieval info: CONSTANT: PORT_ACTIVECLOCK STRING "PORT_UNUSED"
 // Retrieval info: CONSTANT: PORT_ARESET STRING "PORT_USED"

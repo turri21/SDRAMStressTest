@@ -7,9 +7,19 @@ BOARD=
 ROMSIZE1=8192
 ROMSIZE2=4096
 
-all: $(DEMISTIFYPATH)/site.mk $(SUBMODULES) firmware init compile tns mist
+TARGETS_NOMIST=$(DEMISTIFYPATH)/site.template $(DEMISTIFYPATH)/site.mk $(SUBMODULES) firmware init compile tns
+ifndef BOARDS
+	TARGETS = $(TARGETS_NOMIST) mist mister
+else
+	TARGETS = $(TARGETS_NOMIST)
+endif
 
-$(DEMISTIFYPATH)/site.mk:
+all: $(TARGETS)
+# Use the file least likely to change within DeMiSTify to detect submodules!
+$(DEMISTIFYPATH)/COPYING:
+	git submodule update --init --recursive
+
+$(DEMISTIFYPATH)/site.mk: $(DEMISTIFYPATH)/COPYING
 	$(info ******************************************************)
 	$(info Please copy the example DeMiSTify/site.template file to)
 	$(info DeMiSTify/site.mk and edit the paths for the version(s))
@@ -49,11 +59,20 @@ clean:
 tns:
 	@for BOARD in ${BOARDS}; do \
 		echo $$BOARD; \
-		grep -r Design-wide\ TNS $$BOARD/output_files/*.rpt; \
-		echo -ne '\007'; \
+		grep -r Design-wide\ TNS $$BOARD/output_files/*.rpt || echo "No data for $$BOARD"; \
 	done
 
 .PHONY: mist
 mist:
-	$(Q13)/quartus_sh --flow compile mist/$(PROJECT)_MiST.qpf
+	@echo -n "Compiling $(PROJECT) for MiST... "
+	@$(QUARTUS_MIST)/quartus_sh >mist/compile.log --flow compile mist/$(PROJECT)_MiST.qpf \
+		&& echo "\033[32mSuccess\033[0m" || grep Error mist/compile.log
+	@grep -r Design-wide\ TNS mist/*.rpt
+
+.PHONY: mister
+mister:
+	@echo -n "Compiling $(PROJECT) for MiSTer... "
+	@$(QUARTUS_MISTER)/quartus_sh >MiSTer/compile.log --flow compile MiSTer/$(PROJECT)_MiSTer.qpf \
+		&& echo "\033[32mSuccess\033[0m" || grep Error MiSTer/compile.log
+	@grep -r Design-wide\ TNS MiSTer/*.rpt
 

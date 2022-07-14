@@ -153,6 +153,7 @@ pll pll (
 
 sdramtest #(.sysclk_frequency(1000)) test (
 	.clk(sysclk),
+	.slowclk(vidclk),
 	.reset_in(pll_locked & !status[0]),
 	.DRAM_DQ(SDRAM_DQ),
 	.DRAM_ADDR(SDRAM_A),
