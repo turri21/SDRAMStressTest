@@ -1,0 +1,12 @@
+set_global_assignment -name VERILOG_FILE sdram_defs.v
+set_global_assignment -name QIP_FILE ../DeMiSTify/EightThirtyTwo/RTL/debug_bridge_jtag.qip
+#
+set_global_assignment -name SYSTEMVERILOG_FILE emu.sv
+set_global_assignment -name SDC_FILE constraints.sdc
+set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/sdramtest.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/sdram.sv
+set_global_assignment -name SYSTEMVERILOG_FILE ../rtl/porttest.sv
+set_global_assignment -name VERILOG_FILE ../rtl/lfsr.v
+set_global_assignment -name VHDL_FILE  ../rtl/video_timings.vhd
+set_global_assignment -name QIP_FILE  rtl/pll.qip
+
