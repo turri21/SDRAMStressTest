@@ -43,12 +43,15 @@
 // If the core has a variable clock, specify the fastest rate.
 
 // SDRAM_RISKCONTENTION <set to 1 to leave less space between reads and subsequent writes in CL3 mode.>
-//`define SDRAM_RISKCONTENTION 0
+`define SDRAM_CL 3
+`define SDRAM_RISKCONTENTION 0
 
-//`define SDRAM_CL 2
 
-module sdram #(parameter SDRAM_tCK=7800 )
+module sdram #(parameter SDRAM_tCK=7800)
 (
+
+	
+	
 	// interface to the MT48LC16M16 chip
 	inout  [15:0] SDRAM_DQ,   // 16 bit bidirectional data bus
 	output reg [`SDRAM_ROWBITS-1:0] SDRAM_A,    // 13 bit multiplexed address bus
@@ -679,7 +682,7 @@ always @(posedge clk,negedge init_n) begin
 						// We have to block two subsequent write slots,
 						// unless we're operating CL2 with burst 1,
 						// in which case we only need to block 1
-						readcycles[(`SDRAM_RISKCONTENTION || `SDRAM_CL==2) && BURST_LENGTH==3'b000 ? 0 : 1]<=~bankwr[2];
+						readcycles[(`SDRAM_RISKCONTENTION || (`SDRAM_CL==2 && BURST_LENGTH==3'b000)) ? 0 : 1] <= ~bankwr[2];
 
 						port_state[bankport[2]]<=bankstate[2];
 						bankbusy[2]<=BANK_DELAY[4:0];
@@ -695,7 +698,7 @@ always @(posedge clk,negedge init_n) begin
 						SDRAM_A <= bankaddr[2][`SDRAM_ROWBITS+`SDRAM_COLBITS:`SDRAM_COLBITS+1];
 						SDRAM_BA <= 2'b10;
 					end else if(bankreq[3] && bankready[3] && (!writepending || bankwr[3]) && !(writeblocked && bankwr[3])) begin
-						readcycles[(`SDRAM_RISKCONTENTION || `SDRAM_CL==2) && BURST_LENGTH==3'b000 ? 0 : 1]<=~bankwr[3];
+                  readcycles[((`SDRAM_RISKCONTENTION || (`SDRAM_CL==2)) && (BURST_LENGTH==3'b000)) ? 0 : 1] <= ~bankwr[3];
 						port_state[bankport[3]]<=bankstate[3];
 						bankbusy[3]<=BANK_DELAY[4:0];
 						ras_ba<=2'b11;
@@ -710,7 +713,7 @@ always @(posedge clk,negedge init_n) begin
 						SDRAM_A <= bankaddr[3][`SDRAM_ROWBITS+`SDRAM_COLBITS:`SDRAM_COLBITS+1];
 						SDRAM_BA <= 2'b11;
 					end else if(bankreq[0] && bankready[0] && (!writepending || bankwr[0]) && !(writeblocked && bankwr[0])) begin
-						readcycles[(`SDRAM_RISKCONTENTION || `SDRAM_CL==2) && BURST_LENGTH==3'b000 ? 0 : 1]<=~bankwr[0];
+						readcycles[((`SDRAM_RISKCONTENTION || (`SDRAM_CL == 2)) && (BURST_LENGTH == 3'b000)) ? 0 : 1] <= ~bankwr[0];
 						port_state[bankport[0]]<=bankstate[0];
 						bankbusy[0]<=BANK_DELAY[4:0];
 						ras_ba<=2'b00;
@@ -725,7 +728,7 @@ always @(posedge clk,negedge init_n) begin
 						SDRAM_A <= bankaddr[0][`SDRAM_ROWBITS+`SDRAM_COLBITS:`SDRAM_COLBITS+1];
 						SDRAM_BA <= 2'b00;
 					end else if(bankreq[1] && bankready[1] && (!writepending || bankwr[1]) && !(writeblocked && bankwr[1])) begin
-						readcycles[(`SDRAM_RISKCONTENTION || `SDRAM_CL==2) && BURST_LENGTH==3'b000 ? 0 : 1]<=~bankwr[1];
+                  readcycles[((`SDRAM_RISKCONTENTION || (`SDRAM_CL == 2)) && (BURST_LENGTH == 3'b000)) ? 0 : 1] <= ~bankwr[1];
 						port_state[bankport[1]]<=bankstate[1];
 						bankbusy[1]<=BANK_DELAY[4:0];
 						ras_ba<=2'b01;
